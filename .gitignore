@@ -1,0 +1,26 @@
+# 1. Virtual Environments (NEVER commit these)
+venv/
+env/
+.venv/
+
+# 2. Secrets & Configs (Protects your API keys and passwords)
+.env
+*.env
+.env.local
+
+# 3. Python Cache (Keeps your repo clean of compiled junk)
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# 4. OS Generated Files
+.DS_Store
+Thumbs.db
+
+# 5. Data & Databases (Prevents uploading massive text/vector files)
+# We ignore the files inside the folder, but keep the folder structure
+data/documents/*
+!data/documents/.gitkeep
+*.faiss
+*.index
