@@ -11,6 +11,7 @@ from vector.vector_store import VectorStore
 
 from configs.settings import settings
 from extraction.entity_extractor import EntityExtractor
+from graph.community_detection import CommunityDetector
 
 loader = DocumentLoader()
 cleaner = DocumentCleaner()
@@ -67,5 +68,10 @@ for chunk in chunks:
             source=chunk["source"],
             chunk_id=chunk["chunk_id"]
         )
+
+detector = CommunityDetector(graph_builder.client)
+detector.detect()
+
+print("Community detection complete")
 
 print("Graph construction complete")
