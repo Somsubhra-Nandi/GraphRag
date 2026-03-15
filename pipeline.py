@@ -64,8 +64,8 @@ for chunk in chunks:
             t["subject"],
             t["relation"],
             t["object"],
-            "Entity",
-            "Entity"
+            source=chunk["source"],
+            chunk_id=chunk["chunk_id"]
         )
 
 print("Graph construction complete")
