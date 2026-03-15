@@ -17,7 +17,7 @@ class GraphBuilder:
         query = f"""
         MERGE (a:{subject_type} {{name:$subject}})
         MERGE (b:{object_type} {{name:$object}})
-        MERGE (a)-[r:{relation}]->(b)
+        MERGE (a)-[r:`{relation}`]->(b)
         """
 
         params = {
