@@ -22,7 +22,6 @@ graph_builder = GraphBuilder()
 entity_extractor = EntityExtractor()
 
 docs = loader.load_documents()
-
 chunks = []
 
 for doc in docs:
@@ -64,7 +63,9 @@ for chunk in chunks:
         graph_builder.add_triple(
             t["subject"],
             t["relation"],
-            t["object"]
+            t["object"],
+            "Entity",
+            "Entity"
         )
 
 print("Graph construction complete")
