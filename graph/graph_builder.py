@@ -1,4 +1,5 @@
 from graph.graph_client import GraphClient
+from graph.entity_resolution import EntityResolver
 
 
 class GraphBuilder:
@@ -6,14 +7,18 @@ class GraphBuilder:
     def __init__(self):
 
         self.client = GraphClient()
+        self.resolver = EntityResolver()
 
-    def add_triple(self, subject, relation, obj):
+    def add_triple(self, subject, relation, obj, subject_type="Entity", object_type="Entity"):
 
-        query = """
-        MERGE (a:Entity {name:$subject})
-        MERGE (b:Entity {name:$object})
-        MERGE (a)-[r:`%s`]->(b)
-        """ % relation
+        subject = self.resolver.resolve(subject)
+        obj = self.resolver.resolve(obj)
+
+        query = f"""
+        MERGE (a:{subject_type} {{name:$subject}})
+        MERGE (b:{object_type} {{name:$object}})
+        MERGE (a)-[r:{relation}]->(b)
+        """
 
         params = {
             "subject": subject,
