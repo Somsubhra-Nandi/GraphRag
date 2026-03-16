@@ -43,17 +43,23 @@ embeddings = embedder.generate(texts)
 store = VectorStore(len(embeddings[0]))
 
 store.add(embeddings, chunks)
+store.save()
 
-print("Vector store ready")
+print("Vector store saved")
 
 
 # ---------- Graph extraction ----------
 
-for chunk in chunks:
+from tqdm import tqdm
+
+for chunk in tqdm(chunks, desc="Processing chunks"):
 
     text = chunk["text"]
 
     entities = entity_extractor.extract(text)
+
+    if not entities:
+        continue
 
     result = relation_extractor.extract(text, entities)
 
