@@ -24,3 +24,4 @@ data/documents/*
 !data/documents/.gitkeep
 *.faiss
 *.index
+vector_chunks.pkl
