@@ -38,7 +38,11 @@ class EntityExtractor:
 
     def extract(self, text):
         prompt = f"""
-        Extract the core entities (like companies, people, technologies, locations) from the text.
+        Extract the most meaningful entities from the text for a knowledge graph.
+        
+        Rules:
+        - Dynamically determine the `type` based on the context (e.g., Company, Person, Concept, Disease, Framework, Location). Do not restrict yourself to a predefined list.
+        - Do not extract standalone numbers, years, or dates as entities. We will capture those as part of the relationships instead.
         
         Text:
         {text}
@@ -46,7 +50,7 @@ class EntityExtractor:
         Return exactly this JSON format:
         {{
             "entities": [
-                {{"name": "EntityName", "type": "EntityType"}}
+                {{"name": "EntityName", "type": "DynamicType"}}
             ]
         }}
         """
