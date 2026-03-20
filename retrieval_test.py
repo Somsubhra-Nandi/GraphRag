@@ -18,7 +18,7 @@ vector_retriever = VectorRetriever(vector_store, settings.EMBEDDING_MODEL)
 retriever = HybridRetriever(graph_retriever, vector_retriever)
 
 # 4. Test it!
-query = "How did Tesla improve battery technology?"
+query = "When was SpaceX founded and by whom?"
 print(f"Testing Query: {query}\n")
 
 context = retriever.retrieve(query)
