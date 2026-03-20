@@ -15,31 +15,31 @@ class RelationExtractor:
     def extract(self, text, entities):
 
         prompt = f"""
-Extract relationships between the provided entities.
+        Extract relationships between the provided entities.
 
-Rules for relations:
-- The relation MUST be a single, uppercase string with underscores.
-- Standardize the verbs (e.g., use ACQUIRED instead of bought, FOUNDED instead of created).
-- IMPORTANT: If a crucial number, year, or date is tied to this relationship, embed it directly into the relation string to preserve the data (e.g., ACQUIRED_IN_2019, INCREASED_BY_500, INVENTED_IN_1800).
- 
-Entities:
-{entities}
+        Rules for relations:
+        - The relation MUST be a single, uppercase string with underscores.
+        - Standardize the verbs (e.g., use ACQUIRED instead of bought, FOUNDED instead of created).
+        - IMPORTANT: If there is a crucial number, year, date, or amount tied to this relationship, extract it and place it in the `properties` dictionary.
+        
+        Entities:
+        {entities}
 
-Return JSON format:
+        Return JSON format:
+        {{
+         "relations":[
+           {{
+             "subject":"entity",
+             "relation":"RELATION_TYPE",
+             "object":"entity",
+             "properties": {{"year": "2019", "amount": "500"}} // Include this ONLY if numbers/dates exist!
+           }}
+         ]
+        }}
 
-{{
- "relations":[
-   {{
-     "subject":"entity",
-     "relation":"RELATION_TYPE",
-     "object":"entity"
-   }}
- ]
-}}
-
-Text:
-{text}
-"""
+        Text:
+        {text}
+        """
 
         response = self.client.chat.completions.create(
             model="gpt-4o-mini",
