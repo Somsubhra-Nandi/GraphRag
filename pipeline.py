@@ -71,6 +71,7 @@ for chunk in tqdm(chunks, desc="Processing chunks"):
             t["subject"],
             t["relation"],
             t["object"],
+            properties=t["properties"],
             source=chunk["source"],
             chunk_id=chunk["chunk_id"]
         )
