@@ -19,23 +19,30 @@ class RelationExtractor:
 
         Rules for relations:
         - The relation MUST be a single, uppercase string with underscores.
-        - Standardize the verbs (e.g., use ACQUIRED instead of bought, FOUNDED instead of created).
-        - IMPORTANT: If there is a crucial number, year, date, or amount tied to this relationship, extract it and place it in the `properties` dictionary.
-        
-        Entities:
-        {entities}
+        - Standardize the verbs (e.g., use ACQUIRED, FOUNDED, DEVELOPED).
+        - EXTRACT ALL DATES AND NUMBERS: If a year, date, or number is mentioned in the same sentence as the relationship, you MUST extract it into the `properties` dictionary.
 
-        Return JSON format:
+        === EXAMPLE ===
+        Text: SpaceX was founded by Elon Musk in 2002.
+        Entities: [{{"name": "SpaceX"}}, {{"name": "Elon Musk"}}]
+        Output:
         {{
          "relations":[
            {{
-             "subject":"entity",
-             "relation":"RELATION_TYPE",
-             "object":"entity",
-             "properties": {{"year": "2019", "amount": "500"}} // Include this ONLY if numbers/dates exist!
+             "subject":"SpaceX",
+             "relation":"FOUNDED",
+             "object":"Elon Musk",
+             "properties": {{"year": "2002"}}
            }}
          ]
         }}
+        === END EXAMPLE ===
+
+        Now, process the following:
+        Entities:
+        {entities}
+
+        Return ONLY the JSON format shown in the example.
 
         Text:
         {text}
