@@ -21,7 +21,8 @@ class GraphBuilder:
         chunk_id=None,
         confidence=0.9
     ):
-
+        if str(obj).strip().isdigit() or str(subject).strip().isdigit():
+            return  # Skip triples where subject or object is just a number
         subject = self.resolver.resolve(subject)
         obj = self.resolver.resolve(obj)
 
