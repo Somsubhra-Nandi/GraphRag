@@ -1,5 +1,5 @@
 from extraction.entity_extractor import EntityExtractor
-
+import json
 
 class GraphRetriever:
 
@@ -29,7 +29,8 @@ class GraphRetriever:
             RETURN DISTINCT
                 startNode(rel).name AS subject,
                 type(rel) AS relation,
-                endNode(rel).name AS object
+                endNode(rel).name AS object,
+                properties(rel) AS properties
             LIMIT 20
             """
 
@@ -38,6 +39,13 @@ class GraphRetriever:
             results.extend(data)
 
         # deduplicate
-        unique = [dict(t) for t in {tuple(d.items()) for d in results}]
+        unique = []
+        seen = set()
+        for d in results:
+            # Convert dict to a string to safely check for duplicates
+            d_str = json.dumps(d, sort_keys=True)
+            if d_str not in seen:
+                seen.add(d_str)
+                unique.append(d)
 
         return unique
