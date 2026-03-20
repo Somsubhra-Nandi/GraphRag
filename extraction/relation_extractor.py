@@ -17,6 +17,11 @@ class RelationExtractor:
         prompt = f"""
 Extract relationships between the provided entities.
 
+Rules for relations:
+- The relation MUST be a single, uppercase string with underscores.
+- Standardize the verbs (e.g., use ACQUIRED instead of bought, FOUNDED instead of created).
+- IMPORTANT: If a crucial number, year, or date is tied to this relationship, embed it directly into the relation string to preserve the data (e.g., ACQUIRED_IN_2019, INCREASED_BY_500, INVENTED_IN_1800).
+ 
 Entities:
 {entities}
 
