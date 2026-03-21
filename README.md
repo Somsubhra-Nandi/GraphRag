@@ -82,7 +82,7 @@ This saves compute and reduces LLM context noise.
 
 ---
 
-## ⚡ Quick Start
+##  Quick Start
 
 ### Prerequisites
 
@@ -127,7 +127,7 @@ This saves compute and reduces LLM context noise.
 
 ---
 
-## 🔮 Future Roadmap (V1)
+##  Future Roadmap (V1)
 
 - **Multi-Step ReAct Agent:** Upgrading the Query Planner into a looping execution agent that can dynamically explore the graph based on intermediate findings (e.g., *"Hop 1 found X, now I must search for Y"*).
 
