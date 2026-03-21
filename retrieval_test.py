@@ -5,9 +5,11 @@ from retrieval.hybrid_retriever import HybridRetriever
 from vector.vector_store import VectorStore
 from configs.settings import settings
 from planner.query_planner import QueryPlanner
+from retrieval.reranker import Reranker
 
 # Initialize the query planner
 planner = QueryPlanner()
+reranker = Reranker()
 
 # 1. Initialize DB Clients
 graph_client = GraphClient()
@@ -19,7 +21,7 @@ graph_retriever = GraphRetriever(graph_client)
 vector_retriever = VectorRetriever(vector_store, settings.EMBEDDING_MODEL)
 
 # 3. Initialize Hybrid Engine
-retriever = HybridRetriever(graph_retriever, vector_retriever,planner)
+retriever = HybridRetriever(graph_retriever, vector_retriever,planner,reranker)
 
 # 4. Test it!
 query = "When was SpaceX founded and by whom?"
