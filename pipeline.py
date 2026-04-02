@@ -30,7 +30,7 @@ triple_builder = TripleBuilder()
 graph_builder = GraphBuilder()
 
 
-# ---------- LOAD + CLEAN ----------
+# ---------- LOAD and CLEAN ----------
 
 docs = loader.load_documents()
 
@@ -56,7 +56,7 @@ store = VectorStore(len(embeddings[0]))
 store.add(embeddings, chunks)
 store.save()
 
-print("✅ Vector store ready")
+print(" Vector store ready")
 
 
 # =========================================================
